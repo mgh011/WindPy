@@ -5,9 +5,9 @@ def staticTiltCorr(u, v, w, roll, pitch, yaw):
     
 
     Args:
-        u (numpy.ndarray): 1-D array. First wind component (first horizontal component).
-        v (numpy.ndarray): 1-D array. Second wind component (second horizontal component).
-        w (numpy.ndarray, optional): 1-D array. Third wind component (vertical component). 
+        u (numpy.ndarray): 1-D array. First wind component ().
+        v (numpy.ndarray): 1-D array. Second wind component ().
+        w (numpy.ndarray, optional): 1-D array. Third wind component (). 
         roll:
         pitch:  
         yaw:
