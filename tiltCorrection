@@ -1,1 +1,21 @@
+def tiltCorrection(u, v, w, rotations):
+    """
+    .
 
+    Args:
+        u: array-like, 1-D (along-wind component)
+        v: array-like, 1-D (across-wind component)
+        w: array-like, 1-D (vertical wind component)
+        rotations: 
+
+    Returns:
+      
+        
+    Function Description:
+        
+
+    Author: M. Ghirardelli - Last modified: 12-08-2024
+    """
+
+   
+    return 
