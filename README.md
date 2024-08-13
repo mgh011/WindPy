@@ -1,8 +1,8 @@
-windFiltering:
-  - 
-
 qualityCheck:
   - stationaryTest
+
+windFiltering:
+  - work in progress...
 
 tiltCorrection:
   - staticCorr
