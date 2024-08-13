@@ -25,7 +25,7 @@ def frictionVelocity(u, v, w):
         The output of the function is the friction velocity (u_star) 
         and the Reynolds stress tensor (R).
 
-    Author: M. Ghirardelli (on original contribution by E. Cheynet) - Last modified: 13-08-2024
+    Author: M. Ghirardelli (built on the original effort of E.Cheynet https://github.com/ECheynet) - Last modified: 13-08-2024
     """
 
     # Detrend the wind components to remove linear trends
