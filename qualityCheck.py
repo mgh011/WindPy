@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def stationaryTest(u, t, Nwin, thres1, thres2):
+def stationary_test(u, t, Nwin, thres1, thres2):
     """
     Assess the stationarity of a time series using a moving window function.
 
@@ -48,7 +48,7 @@ def stationaryTest(u, t, Nwin, thres1, thres2):
     return err1, err2, flag
 
 
-def saturationTest(u, v, w, t, sonic_type):
+def saturation_test(u, v, w, t, sonic_type):
     """
     Check the saturation levels of total wind speed and temperature measurements from sonic anemometers.
 
