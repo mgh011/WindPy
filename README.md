@@ -8,6 +8,7 @@ windFiltering:
 tiltCorrection:
   - static_corr
   - dynamic_corr
+  - planar_fit
 
 windFeatures:
   - friction_velocity
