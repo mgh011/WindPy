@@ -1,13 +1,17 @@
 qualityCheck:
-  - stationaryTest
-  - saturationTest
+  - stationary_test
+  - saturation_test
 
 windFiltering:
-  - despikeMauder
+  - despike_mauder
 
 tiltCorrection:
-  - staticCorr
-  - dynamicCorr
+  - static_corr
+  - dynamic_corr
 
 windFeatures:
-  - frictionVelocity
+  - friction_velocity
+
+windStats:
+  - fft
+  - plot_fft
