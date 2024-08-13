@@ -16,7 +16,7 @@ def dynamicTiltCorr(u, v, w, roll, pitch, yaw):
     Returns:
        U_rotated, V_rotated, W_rotated (numpy.ndarray): Arrays of rotated wind components in the global coordinate system.
 
-    Author: M. Ghirardelli - Latest Update: 12.08.24
+    Author: M. Ghirardelli - Last modified: 13-08-2024
     """
     
     # Convert angles to radians
