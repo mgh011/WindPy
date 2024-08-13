@@ -1,6 +1,6 @@
 import numpy as np
 
-def staticCorr(u, v, w=None, method='rot2'):
+def static_corr(u, v, w=None, method='rot2'):
     """
     Corrects the wind velocity components for non-zero tilt angles and computes them in the wind-based coordinate system.
 
@@ -83,7 +83,7 @@ def staticCorr(u, v, w=None, method='rot2'):
         raise ValueError("Invalid method specified. Use 'rot1', 'rot2', or 'rot3'.")
         
 
-def dynamicCorr(u, v, w, roll, pitch, yaw):
+def dynamic_corr(u, v, w, roll, pitch, yaw):
     """
     Applies a rotation based on roll, pitch, and yaw angles to the wind velocity components (u, v, w)
     for each timestamp. The components u, v, and w are defined in the instrument's local coordinate system.
@@ -135,3 +135,6 @@ def dynamicCorr(u, v, w, roll, pitch, yaw):
     W = R31 * u + R32 * v + R33 * w
     
     return U, V, W
+
+def planar_fit():
+    return
