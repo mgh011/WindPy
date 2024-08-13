@@ -31,7 +31,7 @@ def stationaryTest(u, t, Nwin, thres1, thres2):
             often require transformation (e.g., differencing, detrending) 
             before further analysis.
 
-    Author: M. Ghirardelli (on E.Cheynet) - Last modified: 13-08-2024
+    Author: M. Ghirardelli (built on the original effort of E.Cheynet https://github.com/ECheynet) - Last modified: 13-08-2024
     """
 
     y = pd.Series(u, index=t)
