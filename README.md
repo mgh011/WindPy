@@ -3,7 +3,7 @@ qualityCheck:
   - saturationTest
 
 windFiltering:
-  - work in progress...
+  - despikeMauder
 
 tiltCorrection:
   - staticCorr
