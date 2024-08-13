@@ -1,5 +1,6 @@
 qualityCheck:
   - stationaryTest
+  - saturationTest
 
 windFiltering:
   - work in progress...
