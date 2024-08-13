@@ -15,7 +15,7 @@ def staticTiltCorr(u, v, w=None, method='rot2'):
         V1 (numpy.ndarray): 1-D array. Across wind component.
         W1 (numpy.ndarray or None): 1-D array or None. Vertical wind component. None if not provided.
 
-    Author: M. Ghirardelli - Latest Update: 12.08.24
+    Author: M. Ghirardelli - Last modified: 13-08-2024 
     """
     
     # If w is not provided, only horizontal plane rotation (rot1)
