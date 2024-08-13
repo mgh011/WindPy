@@ -1,6 +1,6 @@
 import numpy as np
 
-def despikeMauder(data, q=7):
+def despike_mauder(data, q=7):
     """
     Identify outliers using the Median Absolute Deviation (MAD) method, based on the approach
     proposed by Mauder et al., 2012, that relies on a default threshold of 7 MAD deviations. 
