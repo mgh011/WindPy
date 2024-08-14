@@ -14,5 +14,7 @@ windFeatures:
   - friction_velocity
 
 windSpectra:
-  - fft (Work in progress)
-  - plot_fft (Work in progress)
+  - fft 
+  - plot_fft 
+  - psd
+  - plot_psd
