@@ -97,6 +97,8 @@ def psd(freqs, fft_values, sample_rate):
         This function computes the Power Spectral Density (PSD) of the signal by taking the squared 
         magnitude of the FFT values, normalizing them by the sample rate, and adjusting for the length 
         of the time series. The PSD is only calculated for the positive frequencies.
+
+    Author: M. Ghirardelli - Last modified: 14-08-2024
     """
     power = np.abs(fft_values)**2
     psd = power / (len(freqs) * sample_rate)
@@ -119,6 +121,8 @@ def plot_psd(freqs, psd, **kwargs):
     Function Description:
         This function plots the PSD on a log-log scale. It shows only the positive frequencies.
         Users can customize labels and other plot attributes via additional keyword arguments.
+
+    Author: M. Ghirardelli - Last modified: 14-08-2024
     """
     positive_freqs = freqs[:len(freqs)//2]
 
