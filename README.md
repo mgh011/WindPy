@@ -8,11 +8,11 @@ windFiltering:
 tiltCorrection:
   - static_corr
   - dynamic_corr
-  - planar_fit
+  - planar_fit (Work in progress)
 
 windFeatures:
   - friction_velocity
 
 windStats:
-  - fft
-  - plot_fft
+  - fft (Work in progress)
+  - plot_fft (Work in progress)
