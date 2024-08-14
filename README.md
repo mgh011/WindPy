@@ -13,6 +13,6 @@ tiltCorrection:
 windFeatures:
   - friction_velocity
 
-windStats:
+windSpectra:
   - fft (Work in progress)
   - plot_fft (Work in progress)
