@@ -76,3 +76,62 @@ def plot_fft(freqs, fft_values, **kwargs):
             plt.gca().set(**{key: value})
     
     plt.show()
+
+
+def psd(freqs, fft_values, sample_rate):
+    """
+    Compute the Power Spectral Density (PSD) from the FFT values.
+
+    Args:
+        freqs: Array of frequency bins in Hz.
+        fft_values: Array of complex FFT values.
+        sample_rate: Sampling rate of the time series in Hz.
+        
+    Requires:
+        numpy
+        
+    Returns:
+        psd: Array of PSD values corresponding to the positive frequency bins.
+
+    Function Description:
+        This function computes the Power Spectral Density (PSD) of the signal by taking the squared 
+        magnitude of the FFT values, normalizing them by the sample rate, and adjusting for the length 
+        of the time series. The PSD is only calculated for the positive frequencies.
+    """
+    power = np.abs(fft_values)**2
+    psd = power / (len(freqs) * sample_rate)
+    psd = psd[:len(freqs)//2] * 2
+    psd[0] = psd[0] / 2
+    return psd
+
+def plot_psd(freqs, psd, **kwargs):
+    """
+    Plot the Power Spectral Density (PSD) on a log-log scale.
+
+    Args:
+        freqs: Array of frequency bins in Hz.
+        psd: Array of PSD values in SI units (W/Hz or dB/Hz).
+        **kwargs: Additional keyword arguments for custom plot labels (e.g., xlabel, ylabel).
+
+    Requires:
+        matoplotlib
+
+    Function Description:
+        This function plots the PSD on a log-log scale. It shows only the positive frequencies.
+        Users can customize labels and other plot attributes via additional keyword arguments.
+    """
+    positive_freqs = freqs[:len(freqs)//2]
+
+    plt.figure(figsize=(10, 6))
+    plt.loglog(positive_freqs, psd)
+    
+    plt.xlabel(kwargs.get('xlabel', 'Frequency (Hz)'))
+    plt.ylabel(kwargs.get('ylabel', 'Power/Frequency (W/Hz)' if 'ylabel' not in kwargs else kwargs['ylabel']))
+    plt.title(kwargs.get('title', 'Power Spectral Density'))
+    plt.grid(True)
+    
+    for key, value in kwargs.items():
+        if key not in ['xlabel', 'ylabel', 'title']:
+            plt.gca().set(**{key: value})
+    
+    plt.show()
