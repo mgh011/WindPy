@@ -2,6 +2,49 @@ import numpy as np
 from scipy import signal
 from scipy.stats import kurtosis
 
+def momentumAndHeatFlux(f, u, v, w, t):
+    """
+    Computes the momentum fluxes (uw, vw) and the heat flux (wt) based on the input wind 
+    velocity components and temperature data. The data is detrended before calculating the fluxes.
+    
+    Args:
+        f: float, sampling frequency (Hz)
+        u: array-like, 1-D, along-wind velocity component (m/s)
+        v: array-like, 1-D, across-wind velocity component (m/s)
+        w: array-like, 1-D, vertical wind velocity component (m/s)
+        t: array-like, 1-D, sonic temperature (K)
+           
+    Returns:
+        uw: float, momentum flux (covariance between along-wind and vertical wind components)
+        vw: float, momentum flux (covariance between across-wind and vertical wind components)
+        wt: float, heat flux (covariance between vertical wind and temperature)
+    
+    Function Description:
+        This function computes the momentum fluxes (uw, vw) and the heat flux (wt) from the 
+        along-wind (u), across-wind (v), vertical wind (w), and temperature (t) data. 
+        The input data is detrended to remove any linear trends, and the fluxes are computed as the 
+        mean of the products of the detrended variables.
+    
+    Author: M. Ghirardelli 
+    Last modified: 24-09-2024
+    """
+
+    # Detrend the wind components and temperature to remove linear trends
+    u_detrended = signal.detrend(u)
+    v_detrended = signal.detrend(v)
+    w_detrended = signal.detrend(w)
+    t_detrended = signal.detrend(t)
+    
+    # Compute momentum fluxes (covariances)
+    uw = np.nanmean(u_detrended * w_detrended)  # Covariance between along-wind (u) and vertical wind (w)
+    vw = np.nanmean(v_detrended * w_detrended)  # Covariance between across-wind (v) and vertical wind (w)
+    
+    # Compute heat flux (covariance between vertical wind (w) and temperature (t))
+    wt = np.nanmean(w_detrended * t_detrended)
+    
+    return uw, vw, wt
+
+
 def frictionVelocity(u, v, w):
     """
     Computes the friction velocity.
