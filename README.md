@@ -18,6 +18,7 @@ windFeatures:
   - frictionVelocity (V)
   - obukhovLength (V)
   - fluxUncertainty
+  - variableUncertainty
 
 windSpectra:
   - fft 
