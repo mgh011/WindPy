@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import signal
 
-def friction_velocity(u, v, w):
+def frictionVelocity(u, v, w):
     """
     Computes the friction velocity.
 
