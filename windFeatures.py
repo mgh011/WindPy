@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import signal
+from scipy.stats import kurtosis
 
 def frictionVelocity(u, v, w):
     """
@@ -182,3 +183,49 @@ def fluxUncertainty(z, f, u, v, w, t):
         
     return a_UW, a_VW, a_WT
 
+
+def variableUncertainty(z, f, u, v, Var):
+    """
+    Computes uncertainties related to any turbulent variable (e.g. u, v, w, t) based on Stiperski et al. (2016)
+    (DOI 10.1007/s10546-015-0103-z).
+
+    Args:
+        z: float, measurement height (m)
+        f: float, sampling frequency (Hz)
+        u: array-like, 1-D, along-wind velocity component (m/s)
+        v: array-like, 1-D, across-wind velocity component (m/s)
+        Var: array-like, 1-D, turbulent variable (e.g. w, temperature, etc.)
+           
+    Returns:
+        a_VarVar: float, uncertainty in the turbulent variable
+    
+    Function Description:
+        This function computes the uncertainty in a turbulent variable (e.g., wind component, temperature, etc.) 
+        based on the measurement height, sampling frequency, and the mean wind speed. It uses the 
+        kurtosis of the variable (Var) as part of the calculation and detrends the variable 
+        before applying the uncertainty formula.
+    
+    Author: M. Ghirardelli 
+    Last modified: 24-09-2024
+    """
+
+    # Compute mean horizontal wind speed
+    U = np.sqrt(np.nanmean(u**2 + v**2))
+    
+    # Detrend the input variable
+    var = signal.detrend(Var)
+    
+    # Calculate measurement duration
+    num_data_points = len(var)
+    duration = num_data_points / f  # Duration in seconds
+    
+    # Coefficient for uncertainty calculation
+    COEFF = z / (duration * U)
+    
+    # Calculate the kurtosis of the detrended variable (kurtosis represents the peakedness of the distribution)
+    A = kurtosis(var, fisher=False, nan_policy='omit') - 3
+    
+    # Compute the uncertainty using the formula from Stiperski et al. (2016)
+    a_VarVar = np.sqrt(np.maximum(0, 4 * COEFF * A))
+    
+    return a_VarVar
