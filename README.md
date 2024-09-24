@@ -15,7 +15,7 @@ tiltCorrection:
   - planar_fit (Work in progress)
 
 windFeatures:
-  - friction_velocity (V)
+  - frictionVelocity (V)
   - obukhovLength (V)
 
 windSpectra:
