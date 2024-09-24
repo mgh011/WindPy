@@ -50,3 +50,48 @@ def friction_velocity(u, v, w):
     R = np.array([[uu, uv, uw], [uv, vv, vw], [uw, vw, ww]])
 
     return u_star, R
+
+
+def obukhovLength(u_star, w, t):
+    """
+    Computes the Monin-Obukhov length.
+
+    Args:
+        u_star: float, friction velocity (pre-calculated)
+        w: array-like, 1-D (vertical wind component)
+        t: array-like, 1-D (virtual potential temperature)
+
+    Returns:
+        L: float, Monin-Obukhov length
+        
+    Function Description:
+        This function computes the Monin-Obukhov length using the friction velocity 
+        (u_star), vertical wind component (w), and virtual potential temperature (t).
+        It detrends the input data, computes the covariance between w and t, 
+        and uses the mean virtual potential temperature to calculate the Monin-Obukhov length (L).
+        
+    Author: M. Ghirardelli
+    Last modified: 24-09-2024
+    """
+    # Constants
+    k = 0.4  # von Kármán constant
+    g = 9.81  # gravitational acceleration (m/s^2)
+    
+    t_mean = t.mean()
+
+    # Detrend the wind components and virtual potential temperature to remove linear trends
+    w = signal.detrend(w)
+    t = signal.detrend(t)
+    
+    # Compute the covariance between w and theta_v
+    cov_wt = np.mean(w * t)
+
+    # Compute the average virtual potential temperature
+    
+    # Compute the Monin-Obukhov length (L)
+    if cov_wt != 0:  # Avoid division by zero
+        L = -(u_star**3 * t_mean) / (k * g * cov_wt)
+    else:
+        L = np.inf  # In case the heat flux is zero, L is infinite (neutral conditions)
+
+    return L
