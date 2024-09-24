@@ -17,6 +17,7 @@ tiltCorrection:
 windFeatures:
   - frictionVelocity (V)
   - obukhovLength (V)
+  - fluxUncertainty
 
 windSpectra:
   - fft 
