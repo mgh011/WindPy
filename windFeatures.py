@@ -44,7 +44,7 @@ def friction_velocity(u, v, w):
     vw = np.mean(v * w)
 
     # Compute the friction velocity (u_star)
-    u_star = np.sqrt(uw**2 + vw**2)
+    u_star = (uw**2 + vw**2)**0.25
 
     # Compute the Reynolds stress tensor (R)
     R = np.array([[uu, uv, uw], [uv, vv, vw], [uw, vw, ww]])
