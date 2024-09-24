@@ -16,6 +16,7 @@ tiltCorrection:
 
 windFeatures:
   - friction_velocity
+  - obukhovLength
 
 windSpectra:
   - fft 
