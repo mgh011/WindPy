@@ -95,3 +95,90 @@ def obukhovLength(u_star, w, t):
         L = np.inf  # In case the heat flux is zero, L is infinite (neutral conditions)
 
     return L
+
+
+def fluxUncertainty(z, f, u, v, w, t):
+    """
+    Computes uncertainties in momentum and heat fluxes (uw, vw, wt) based on Stiperski et al. (2016)
+    (DOI 10.1007/s10546-015-0103-z).
+
+    Args:
+        z: float, measurement height (m)
+        f: float, sampling frequency (Hz)
+        u: array-like, 1-D, along-wind velocity component (m/s)
+        v: array-like, 1-D, across-wind velocity component (m/s)
+        w: array-like, 1-D, vertical wind velocity component (m/s)
+        t: array-like, 1-D, sonic temperature (K)
+        
+    Returns:
+        a_UW: float, uncertainty in momentum flux for uw (along-wind and vertical)
+        a_VW: float, uncertainty in momentum flux for vw (across-wind and vertical)
+        a_WT: float, uncertainty in heat flux for wt (vertical wind and sonic temperature)
+        
+    Requires:
+        frictionVelocity function
+        numpy
+        scipy
+        
+    Function Description:
+        This function computes the uncertainties in momentum and heat fluxes fluxes using the 
+        along-wind (u), across-wind (v), and vertical (w) components of wind velocity and sonic temperature (t). 
+        The wind components and temperature are detrended, and then the squared covariances (uw, vw and WT) 
+        are computed. The uncertainties in these fluxes are then calculated based 
+        on the measurement height, sampling frequency, and wind speed.
+
+        The output of the function includes the uncertainties in the fluxes (uw, vw and wt).
+
+    Author: M. Ghirardelli 
+    Last modified: 24-09-2024
+    """
+    
+    # Compute horizontal wind speed
+    U = np.sqrt(np.nanmean(u**2 + v**2))
+
+    
+    # Detrend the wind components and temperature
+    u = signal.detrend(u)
+    v = signal.detrend(v)
+    w = signal.detrend(w)
+    t = signal.detrend(t)
+    
+    # Compute friction velocity (u_star)
+    u_star, _ = frictionVelocity(u, v, w)
+    
+    # Covariance between vertical wind and temperature (w * t)
+    cov_wt = np.nanmean(w * t)
+    
+    # Compute mean squared products of u*w, v*w, and w*t (covariances)
+    x_UW = np.nanmean((u * w) ** 2)
+    x_VW = np.nanmean((v * w) ** 2)
+    x_WT = np.nanmean((w * t) ** 2)
+    
+    # Calculate measurement duration
+    num_data_points = len(u)
+    duration = num_data_points / f  # Duration in seconds
+    
+    # Coefficient for uncertainty calculation
+    COEFF = z / (duration * U)
+    
+    # Initialize uncertainties
+    a_UW = np.nan
+    a_VW = np.nan
+    a_WT = np.nan
+    
+    # Check if u_star and cov_wt are not zero before calculating uncertainties
+    if u_star != 0 and cov_wt != 0:
+        # Uncertainty in uw (along-wind and vertical)
+        A = (x_UW / u_star ** 4) - 1
+        a_UW = np.sqrt(np.maximum(0, COEFF * A))
+        
+        # Uncertainty in vw (across-wind and vertical)
+        A = (x_VW / u_star ** 4) - 1
+        a_VW = np.sqrt(np.maximum(0, COEFF * A))   
+        
+        # Uncertainty in wt (vertical wind and sonic temperature)
+        A = (x_WT / cov_wt ** 2) - 1
+        a_WT = np.sqrt(np.maximum(0, COEFF * A))
+        
+    return a_UW, a_VW, a_WT
+
