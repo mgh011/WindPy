@@ -15,6 +15,7 @@ tiltCorrection:
   - planar_fit (Work in progress)
 
 windFeatures:
+  - momentumAndHeatFlux
   - frictionVelocity (V)
   - obukhovLength (V)
   - fluxUncertainty
