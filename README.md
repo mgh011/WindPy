@@ -1,3 +1,7 @@
+
+tool_box:
+  - nandetrend
+
 qualityCheck:
   - stationary_test
   - saturation_test
