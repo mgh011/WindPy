@@ -269,7 +269,7 @@ def variableUncertainty(z, f, u, v, Var):
     A = kurtosis(var, fisher=False, nan_policy='omit')
     
     # Compute the uncertainty using the formula from Stiperski et al. (2016)
-    a_VarVar = np.sqrt(np.maximum(0, 4 * COEFF * (A -1))
+    a_VarVar = np.sqrt(np.maximum(0, 4 * COEFF * (A -1)))
     
     
     return a_VarVar
