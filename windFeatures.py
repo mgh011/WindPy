@@ -249,7 +249,7 @@ def variableUncertainty(z, f, u, v, Var):
         before applying the uncertainty formula.
     
     Author: M. Ghirardelli 
-    Last modified: 24-09-2024
+    Last modified: 25-09-2024
     """
 
     # Compute mean horizontal wind speed
@@ -266,9 +266,10 @@ def variableUncertainty(z, f, u, v, Var):
     COEFF = z / (duration * U)
     
     # Calculate the kurtosis of the detrended variable (kurtosis represents the peakedness of the distribution)
-    A = kurtosis(var, fisher=False, nan_policy='omit') - 3
+    A = kurtosis(var, fisher=False, nan_policy='omit')
     
     # Compute the uncertainty using the formula from Stiperski et al. (2016)
-    a_VarVar = np.sqrt(np.maximum(0, 4 * COEFF * A))
+    a_VarVar = np.sqrt(np.maximum(0, 4 * COEFF * (A -1))
+    
     
     return a_VarVar
