@@ -14,7 +14,7 @@ tiltCorrection:
   - dynamic_corr
   - planar_fit (Work in progress)
 
-windFeatures:
+windTurbulence:
   - momentumAndHeatFlux
   - frictionVelocity (V)
   - obukhovLength (V)
