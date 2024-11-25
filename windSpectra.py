@@ -139,3 +139,36 @@ def plot_psd(freqs, psd, **kwargs):
             plt.gca().set(**{key: value})
     
     plt.show()
+
+def binSpectra(f, Su, Nb):
+    """
+        binSpectra(f,Su,Nb) smoothens the estimated power spectral density (PSD) 
+    estimates by binning over logarithmic-spaced bins defined by the array newF
+
+        Input:
+                f: [Nx1] array:  original frequency vector
+
+                Su: [Nx1] array:  PSD estimate
+
+                Nb: [1 x M] or [Mx1] array:  target bins (as a frequency vector)
+
+
+        Output
+                newF: [1 x B] array: new frequency vector
+
+                newS: [1 x B] array: new PSD estimate
+
+
+        Author: E. Cheynet - UiB - Last modified: 10-03-2023
+        """
+
+    newF0 = np.logspace(np.log10(f[1]*0.8), np.log10(f[-1]*1.1), Nb)
+    newSu, newF, ind = binned_statistic(f, Su,
+                                        statistic='median',
+                                        bins=newF0)
+    newF = newF[0:-1]
+    newF = newF[~np.isnan(newSu)]
+    newSu = newSu[~np.isnan(newSu)]
+    return newSu, newF
+
+frequency = 32
