@@ -22,7 +22,7 @@ windTurbulence:
   - variableUncertainty
 
 windSpectra:
-  - fft 
-  - plot_fft 
-  - psd
-  - plot_psd
+  - fft (V)
+  - plot_fft (V)
+  - psd (V)
+  - plot_psd (V)
