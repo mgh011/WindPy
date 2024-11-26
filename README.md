@@ -18,8 +18,8 @@ windTurbulence:
   - momentumAndHeatFlux
   - frictionVelocity (V)
   - obukhovLength (V)
-  - fluxUncertainty
-  - variableUncertainty
+  - fluxUncertainty (V)
+  - variableUncertainty (V)
 
 windSpectra:
   - fft (V)
