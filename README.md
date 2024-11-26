@@ -7,7 +7,7 @@ qualityCheck:
   - saturation_test
 
 windFiltering:
-  - despike_mauder
+  - despike_mauder (V)
 
 tiltCorrection:
   - static_corr
